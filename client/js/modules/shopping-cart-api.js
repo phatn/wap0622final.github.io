@@ -16,4 +16,8 @@ export class ShoppingCartAPI {
     static getAll() {
         return FetchAPI.get(ShoppingCartAPI.SHOPPING_CART_URL);
     }
+
+    static placeOrder() {
+        return FetchAPI.post(`${ShoppingCartAPI.SHOPPING_CART_URL}/place-order`)
+    }
 }

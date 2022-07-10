@@ -1,7 +1,7 @@
 import { UserAPI } from './modules/user-api.js';
 import { ProductAPI } from "./modules/product-api.js";
 import {ShoppingCartAPI} from "./modules/shopping-cart-api.js";
-
+import { Header } from "./components/header/header.js";
 
 import { ProductList } from "./components/product/product-list.js";
 import { Nav } from "./components/nav/nav.js";
@@ -26,12 +26,20 @@ function renderShoppingCart() {
     })
 }
 
+function renderHeader() {
+    new Header().render();
+}
+
+function removeHeader() {
+    new Header().remove();
+}
+
 window.onload = () => {
     let login = new Login();
     let logout = new Logout();
     let nav = new Nav();
     nav.render(login);
-
+    renderHeader()
     let sessionId = sessionStorage.getItem(Config.ACCESS_TOKEN_NAME);
 
     if(sessionId) {
@@ -53,8 +61,10 @@ window.onload = () => {
                         console.log(result)
                         sessionStorage.setItem(Config.ACCESS_TOKEN_NAME, result.accessToken);
                         nav.render(logout, result);
+                        removeHeader();
                         renderProductList();
                         renderShoppingCart();
+
                     } else {
                         alert('Login failed');
                     }

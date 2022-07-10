@@ -33,7 +33,6 @@ module.exports = class Product {
 
     static findById(productId) {
         const index = products.findIndex(p => p.id == productId);
-        console.log(index);
         if (index > -1) {
             return products[index];
         } else {

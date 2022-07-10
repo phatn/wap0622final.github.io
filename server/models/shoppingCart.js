@@ -9,7 +9,6 @@ module.exports = class ShoppingCart {
 
     addCartItem(productId) {
         let cartItem = this.cartItems.find(item => item.product.id == productId);
-        console.log(`cartItem is ${cartItem}`)
         if(cartItem) {
             cartItem.quantity += 1;
         } else {
@@ -34,5 +33,9 @@ module.exports = class ShoppingCart {
             }
 
         }
+    }
+
+    removeCartItems() {
+        this.cartItems = [];
     }
 }

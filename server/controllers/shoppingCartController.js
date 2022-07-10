@@ -33,3 +33,24 @@ exports.removeCartItem = (req, res, next) => {
         res.status(201).json(Session.get(username));
     }
 }
+
+exports.placeOrder = (req, res, next) => {
+    const username = Util.getUsername(req);
+    let shoppingCart = Session.get(username);
+    if(shoppingCart) {
+        let cartItems = shoppingCart.cartItems.filter(cartItem => cartItem.quantity > cartItem.product.stock);
+        if(cartItems.length <= 0) {
+            shoppingCart.cartItems.forEach(cartItem => {
+                cartItem.product.stock -= cartItem.quantity;
+            })
+
+            shoppingCart.removeCartItems();
+        }
+
+
+        res.status(201).json({
+            cart: Session.get(username),
+            products: Product.findAll()
+        });
+    }
+}

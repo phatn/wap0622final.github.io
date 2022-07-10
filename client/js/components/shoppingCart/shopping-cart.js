@@ -1,4 +1,5 @@
 import { ShoppingCartAPI } from "../../modules/shopping-cart-api.js";
+import {ProductList} from "../product/product-list.js";
 
 export class ShoppingCart {
 
@@ -29,30 +30,45 @@ export class ShoppingCart {
             });
         }
 
+
         let shoppingCartItems = `
-            <div class="lead mb-0">Your Shopping Cart</div>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Quantity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    ${rows}
-                    <tr>
-                        <td colspan="5">Total: ${cartTotal}</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="shopping-cart shadow-lg">
+                <div class="lead mb-0">Your Shopping Cart</div>
+                <div class="mt-4"></div>
+                <div>There is no items in your shopping cart!</div>
             </div>
         `;
 
+        if(this.cart && this.cart.cartItems && this.cart.cartItems.length > 0) {
+            shoppingCartItems = `
+            <div class="shopping-cart shadow-lg">
+                <div class="lead mb-0">Your Shopping Cart</div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        ${rows}
+                        <tr>
+                            <td colspan="5" colspan="2"><div class="cart-total">Total: ${cartTotal}</div></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="place-order"><button id="btn-place-order" class="btn btn-primary">Place Order</button></div>
+                </div>
+            </div>
+        `;
+        }
+
         let self = this;
-        document.getElementById('shopping-cart').innerHTML = shoppingCartItems;
+        let shoppingCartElement = document.getElementById('shopping-cart');
+        shoppingCartElement.innerHTML = shoppingCartItems;
 
         let buttonAddCarts = document.getElementsByClassName('btn-cart-plus');
 
@@ -74,6 +90,18 @@ export class ShoppingCart {
                     self.render();
                 });
             })
+        });
+
+        let btnPlaceOrder = document.getElementById('btn-place-order');
+        btnPlaceOrder.addEventListener('click', function() {
+            ShoppingCartAPI.placeOrder().then(data => {
+                self.cart = data.cart;
+                self.render();
+
+                let productList = new ProductList(data.products);
+                productList.render();
+
+            });
         });
     }
 }

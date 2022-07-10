@@ -1,7 +1,6 @@
 const User = require('../models/user');
 
 exports.authenticate = (req, res, next) => {
-    console.log('Enter here')
     let user = User.findAll().find(user => user.username === req.body.username && user.password ===  req.body.password);
     if(user) {
 

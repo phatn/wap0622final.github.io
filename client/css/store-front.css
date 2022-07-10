@@ -39,7 +39,8 @@ footer {
  */
 
 .product-list, .shopping-cart {
-    margin-top: 4rem;
+    padding: 1rem;
+    margin-top: 2rem;
 }
 
 .product-list tr, .shopping-cart tr {
@@ -80,4 +81,21 @@ img.prod-image {
 
 .btn-cart-minus {
     color: red;
+}
+
+.place-order {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.cart-total {
+    font-weight: 400;
+    font-size: 1.2rem;
+    font-style: italic;
+    text-align: right;
+    padding-right: 10rem;
+}
+
+#btn-place-order {
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
 }

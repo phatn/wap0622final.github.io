@@ -25,22 +25,24 @@ export class ProductList {
         });
 
         let productList = `
-            <div class="lead mb-0">Product List</div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Stock</th>
-                    <th scope="col">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                ${rows}
-                </tbody>
-            </table>
+            <div class="product-list shadow-lg">
+                <div class="lead mb-0">Product List</div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    ${rows}
+                    </tbody>
+                </table>
+            </div>
         `;
 
         document.getElementById('product-list').innerHTML = productList;
