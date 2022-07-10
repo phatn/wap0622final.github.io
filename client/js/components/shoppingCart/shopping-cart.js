@@ -78,9 +78,13 @@ export class ShoppingCart {
         if(buttonAddCarts) {
             Array.prototype.forEach.call(buttonAddCarts, function(buttonAddCart) {
                 buttonAddCart.addEventListener('click', function() {
-                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
-                        self.cart = cart;
-                        self.render();
+                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(data => {
+                        if(data.error) {
+                            new ErrorAlert().render(data.error);
+                        } else {
+                            self.cart = data;
+                            self.render();
+                        }
                     });
                 })
             });

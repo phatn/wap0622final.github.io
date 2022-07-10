@@ -7,7 +7,6 @@ exports.getCart = (req, res, next) => {
     res.status(200).json(Session.get(Util.getUsername(req)));
 }
 
-
 exports.addCart = (req, res, next) => {
     res.status(201).json(Session.set(req.body.username, req.body.cartItem));
 }
@@ -20,8 +19,11 @@ exports.addCartItem = (req, res, next) => {
         shoppingCart = new ShoppingCart();
         Session.set(username, shoppingCart);
     }
-    shoppingCart.addCartItem(productId);
-    res.status(201).json(Session.get(username));
+    if(shoppingCart.addCartItem(productId)) {
+        res.status(201).json(Session.get(username));
+    } else {
+        res.status(201).json({error: "Can't add product into the shopping cart!"});
+    }
 }
 
 exports.removeCartItem = (req, res, next) => {

@@ -8,7 +8,16 @@ module.exports = class ShoppingCart {
     }
 
     addCartItem(productId) {
+        const product = Product.findById(productId);
+        if(!product || product.stock <= 0) {
+            return false;
+        }
+
         let cartItem = this.cartItems.find(item => item.product.id == productId);
+        if(cartItem && cartItem.quantity >= product.stock) {
+            return false;
+        }
+
         if(cartItem) {
             cartItem.quantity += 1;
         } else {
@@ -16,6 +25,8 @@ module.exports = class ShoppingCart {
             const cartItem = new CartItem(product, 1);
             this.cartItems.push(cartItem);
         }
+
+        return true;
     }
 
     removeCartItem(productId) {

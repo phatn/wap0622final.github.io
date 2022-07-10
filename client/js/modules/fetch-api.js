@@ -17,7 +17,6 @@ export class FetchAPI {
     }
 
     static async get(url = '') {
-        console.log(`Inside FetchAPI get: ${Util.getAccessToken()}`)
         const response = await fetch(url, {
             method: 'GET',
             mode: 'cors',

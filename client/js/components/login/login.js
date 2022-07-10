@@ -34,7 +34,6 @@ export class Login {
 
             UserAPI.authenticate({username, password }).then(
                 result => {
-                    console.log(`accessToken is ${result.accessToken}`)
                     if(result.accessToken) {
                         Util.setAccessToken(result.accessToken);
                         new Nav().render(new Logout(), result);
