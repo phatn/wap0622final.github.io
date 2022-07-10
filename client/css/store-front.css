@@ -133,3 +133,8 @@ input.error {
 .alert-popup {
     padding: 2rem;
 }
+
+.btn-cart-disabled {
+    pointer-events: none;
+    color: #c6c6c6;
+}

@@ -16,6 +16,7 @@ export class ProductList {
 
         if(this.products) {
             this.products.forEach((prod, index) => {
+                let disabledBtnCart = prod.stock <= 0 ? 'btn-cart-disabled' : '';
                 rows += `
                 <tr>
                     <th scope="row">${index + 1}</th>
@@ -23,7 +24,7 @@ export class ProductList {
                     <td>${prod.price}</td>
                     <td><img class="prod-image" src="${Config.SERVER_URL}${prod.image}"/></td>
                     <td>${prod.stock}</td>
-                    <td><i class="bi-cart-plus cart-icon btn-cart" data-product-id="${prod.id}"></i></td>
+                    <td><i class="bi-cart-plus cart-icon btn-cart ${disabledBtnCart}" data-product-id="${prod.id}"></i></td>
                 </tr>
             `;
             });
