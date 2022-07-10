@@ -16,7 +16,8 @@ export class ShoppingCart {
         let cartTotal = 0;
         if(this.cart) {
             this.cart.cartItems.forEach((cartItem, index) => {
-                let total = Math.round(((cartItem.product.price * cartItem.quantity) + Number.EPSILON) * 100) / 100
+                let disabledBtnCart = cartItem.quantity >= cartItem.product.stock ? 'btn-cart-disabled' : '';
+                let total = Math.round(((cartItem.product.price * cartItem.quantity) + Number.EPSILON) * 100) / 100;
                 cartTotal += total;
                 rows += `
                 <tr>
@@ -27,7 +28,7 @@ export class ShoppingCart {
                     <td style="vertical-align: middle">
                         <span><i class="bi-dash-circle-fill btn-cart-item btn-cart-minus" data-product-id="${cartItem.product.id}"></i></span>
                         <input class="cart-item-quantity" type="text" value="${cartItem.quantity}" />
-                        <span><i class="bi-plus-circle-fill btn-cart-item btn-cart-plus" data-product-id="${cartItem.product.id}"></i></span>
+                        <span><i class="bi-plus-circle-fill btn-cart-item btn-cart-plus ${disabledBtnCart}" data-product-id="${cartItem.product.id}"></i></span>
                     </td>
                 </tr>
             `;
