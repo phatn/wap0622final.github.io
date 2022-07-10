@@ -9,6 +9,10 @@ export class ShoppingCartAPI {
         return FetchAPI.post(ShoppingCartAPI.SHOPPING_CART_URL + '/add-cart-item/' + productId)
     }
 
+    static removeCartItem(productId) {
+        return FetchAPI.post(`${ShoppingCartAPI.SHOPPING_CART_URL}/remove-cart-item/${productId}`)
+    }
+
     static getAll() {
         return FetchAPI.get(ShoppingCartAPI.SHOPPING_CART_URL);
     }

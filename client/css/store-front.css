@@ -68,8 +68,10 @@ img.prod-image {
     text-align: center;
 }
 
-.btn-cart {
+.btn-cart-item {
+    cursor: pointer;
     font-size: 2rem;
+    vertical-align: -0.4rem;
 }
 
 .btn-cart-plus {

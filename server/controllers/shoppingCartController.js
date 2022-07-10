@@ -13,7 +13,6 @@ exports.addCart = (req, res, next) => {
 }
 
 exports.addCartItem = (req, res, next) => {
-    console.log('Enter addCartItem')
     const productId = req.params.productId;
     const username = Util.getUsername(req);
     let shoppingCart = Session.get(username);

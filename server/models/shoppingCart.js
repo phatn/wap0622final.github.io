@@ -19,8 +19,8 @@ module.exports = class ShoppingCart {
         }
     }
 
-    removeCartItem(cartItem) {
-        let index = this.cartItems.find(item => item.product.id == cartItem.product.id);
+    removeCartItem(productId) {
+        let index = this.cartItems.findIndex(item => item.product.id == productId);
         if(index > -1) {
             let foundCartItem = this.cartItems[index];
             if(foundCartItem.quantity <= 1) {

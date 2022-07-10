@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/', shoppingCartController.getCart)
 router.post('/add-cart-item/:productId', shoppingCartController.addCartItem)
-router.post('/remove-cart-item', shoppingCartController.removeCartItem)
+router.post('/remove-cart-item/:productId', shoppingCartController.removeCartItem)
 
 module.exports = router;

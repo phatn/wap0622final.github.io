@@ -47,7 +47,7 @@ export class ProductList {
         let buttonCarts = document.getElementsByClassName('btn-cart');
 
         Array.prototype.forEach.call(buttonCarts, function(buttonCart) {
-            buttonCart.addEventListener('click', function(e)  {
+            buttonCart.addEventListener('click', function() {
                 ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
                     let shoppingCart = new ShoppingCart(cart);
                     shoppingCart.render();
