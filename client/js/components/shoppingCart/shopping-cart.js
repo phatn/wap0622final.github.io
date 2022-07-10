@@ -1,5 +1,8 @@
 import { ShoppingCartAPI } from "../../modules/shopping-cart-api.js";
-import {ProductList} from "../product/product-list.js";
+import { ProductList } from "../product/product-list.js";
+import { SuccessAlert } from "../alert/success-alert.js";
+import { ErrorAlert } from "../alert/error-alert.js";
+
 
 export class ShoppingCart {
 
@@ -95,12 +98,16 @@ export class ShoppingCart {
         let btnPlaceOrder = document.getElementById('btn-place-order');
         btnPlaceOrder.addEventListener('click', function() {
             ShoppingCartAPI.placeOrder().then(data => {
-                self.cart = data.cart;
-                self.render();
+                if(data.error) {
+                    new ErrorAlert().render(data.error);
+                } else {
+                    self.cart = data.cart;
+                    self.render();
 
-                let productList = new ProductList(data.products);
-                productList.render();
-
+                    let productList = new ProductList(data.products);
+                    productList.render();
+                    new SuccessAlert().render(data.message)
+                }
             });
         });
     }

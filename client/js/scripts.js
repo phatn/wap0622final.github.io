@@ -10,6 +10,7 @@ import { Logout } from "./components/logout/logout.js";
 import { ShoppingCart } from "./components/shoppingCart/shopping-cart.js";
 
 import { Config } from "./modules/config.js";
+import {ErrorAlert} from "./components/alert/error-alert.js";
 
 function renderProductList() {
     ProductAPI.getAll().then(products => {
@@ -66,7 +67,7 @@ window.onload = () => {
                         renderShoppingCart();
 
                     } else {
-                        alert('Login failed');
+                        new ErrorAlert().render('Login failed');
                     }
                 }
             );

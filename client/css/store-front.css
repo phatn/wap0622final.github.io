@@ -99,3 +99,10 @@ img.prod-image {
 #btn-place-order {
     padding: 0.7rem 1.5rem 0.7rem 1.5rem;
 }
+
+.alert-popup {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%
+}

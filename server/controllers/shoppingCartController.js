@@ -45,12 +45,13 @@ exports.placeOrder = (req, res, next) => {
             })
 
             shoppingCart.removeCartItems();
+            res.status(201).json({
+                cart: Session.get(username),
+                products: Product.findAll(),
+                message: 'Placed order successfully'
+            });
+        } else {
+            res.status(201).json({error: 'Cannot place order, please reduce quantity of product!'});
         }
-
-
-        res.status(201).json({
-            cart: Session.get(username),
-            products: Product.findAll()
-        });
     }
 }
