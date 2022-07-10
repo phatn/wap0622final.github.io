@@ -24,7 +24,7 @@ html {
 }
 
 #login button {
-   margin-left: 1rem;
+   margin-left: 0.5rem;
 }
 
 #login label {
@@ -39,7 +39,7 @@ html {
 
 #login div.form-item {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 
@@ -120,4 +120,12 @@ img.prod-image {
 button.btn-logout {
     padding-left: 2rem;
     padding-right: 2rem;
+}
+
+input.error {
+    border: 0.08rem solid red;
+}
+
+.form-item #password {
+    margin-top: 0.1rem;
 }
