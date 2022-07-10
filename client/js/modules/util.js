@@ -62,6 +62,7 @@ export class Util {
             new Nav().render(new Logout(), {
                 name: Util.toTitleCase(Util.getSessionUsername())
             });
+
             new Header().remove();
             Util.renderProductList();
             Util.renderShoppingCart();

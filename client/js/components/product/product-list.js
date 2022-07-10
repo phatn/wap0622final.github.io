@@ -1,7 +1,8 @@
 import { Config } from "../../modules/config.js";
 import { ShoppingCartAPI } from "../../modules/shopping-cart-api.js";
 import { ShoppingCart } from "../shoppingCart/shopping-cart.js";
-
+import { Util } from "../../modules/util.js";
+import { ErrorAlert } from "../alert/error-alert.js";
 
 export class ProductList {
 
@@ -54,9 +55,15 @@ export class ProductList {
         if(buttonCarts) {
             Array.prototype.forEach.call(buttonCarts, function(buttonCart) {
                 buttonCart.addEventListener('click', function() {
-                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
-                        let shoppingCart = new ShoppingCart(cart);
-                        shoppingCart.render();
+                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(data => {
+                        if(data.errorAuth) {
+                            Util.renderApplication();
+                        } else if(data.error) {
+                            new ErrorAlert().render(data.error);
+                        } else {
+                            let shoppingCart = new ShoppingCart(data);
+                            shoppingCart.render();
+                        }
                     });
                 })
             });

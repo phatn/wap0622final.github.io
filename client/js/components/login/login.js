@@ -22,7 +22,7 @@ export class Login {
             </div>
             <button id="btn-login" class="btn btn-primary btn-login">Login</button>
         `;
-
+        document.title = 'MyStore - Login';
         document.getElementById('login').innerHTML = login;
         document.getElementById('username').focus();
 
@@ -42,7 +42,7 @@ export class Login {
                         Util.renderShoppingCart();
 
                     } else {
-                        new ErrorAlert().render('Login failed');
+                        new ErrorAlert().render(result.errorAuth);
                     }
                 }
             );

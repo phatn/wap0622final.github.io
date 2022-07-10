@@ -2,6 +2,7 @@ import { ShoppingCartAPI } from "../../modules/shopping-cart-api.js";
 import { ProductList } from "../product/product-list.js";
 import { SuccessAlert } from "../alert/success-alert.js";
 import { ErrorAlert } from "../alert/error-alert.js";
+import {Util} from "../../modules/util.js";
 
 
 export class ShoppingCart {
@@ -68,7 +69,7 @@ export class ShoppingCart {
             </div>
         `;
         }
-
+        document.title = 'MyStore - Shopping Cart';
         let self = this;
         let shoppingCartElement = document.getElementById('shopping-cart');
         shoppingCartElement.innerHTML = shoppingCartItems;
@@ -79,7 +80,9 @@ export class ShoppingCart {
             Array.prototype.forEach.call(buttonAddCarts, function(buttonAddCart) {
                 buttonAddCart.addEventListener('click', function() {
                     ShoppingCartAPI.addCartItem(this.dataset.productId).then(data => {
-                        if(data.error) {
+                        if(data.errorAuth) {
+                            Util.renderApplication();
+                        } else if(data.error) {
                             new ErrorAlert().render(data.error);
                         } else {
                             self.cart = data;
@@ -95,9 +98,14 @@ export class ShoppingCart {
         if(buttonRemoveCarts) {
             Array.prototype.forEach.call(buttonRemoveCarts, function(buttonRemoveCart) {
                 buttonRemoveCart.addEventListener('click', function() {
-                    ShoppingCartAPI.removeCartItem(this.dataset.productId).then(cart => {
-                        self.cart = cart;
-                        self.render();
+                    ShoppingCartAPI.removeCartItem(this.dataset.productId).then(data => {
+
+                        if(data.errorAuth) {
+                            Util.renderApplication();
+                        } else {
+                            self.cart = data;
+                            self.render();
+                        }
                     });
                 })
             });
@@ -108,7 +116,9 @@ export class ShoppingCart {
         if(btnPlaceOrder) {
             btnPlaceOrder.addEventListener('click', function() {
                 ShoppingCartAPI.placeOrder().then(data => {
-                    if(data.error) {
+                    if(data.errorAuth) {
+                        Util.renderApplication();
+                    } else if(data.error) {
                         new ErrorAlert().render(data.error);
                     } else {
                         self.cart = data.cart;
@@ -121,6 +131,5 @@ export class ShoppingCart {
                 });
             });
         }
-
     }
 }

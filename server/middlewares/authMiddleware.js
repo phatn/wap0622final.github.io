@@ -5,6 +5,6 @@ module.exports = (req, res, next) => {
     if(username !== 'null' && username) {
         next();
     } else {
-        res.status(200).json({error : 'Authentication failed!'});
+        res.status(200).json({errorAuth : 'Authentication failed!'});
     }
 }
