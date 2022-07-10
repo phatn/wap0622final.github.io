@@ -10,9 +10,12 @@ export class ProductList {
     }
 
     render() {
+        let productList = '';
         let rows = '';
-        this.products.forEach((prod, index) => {
-            rows += `
+
+        if(this.products) {
+            this.products.forEach((prod, index) => {
+                rows += `
                 <tr>
                     <th scope="row">${index + 1}</th>
                     <td>${prod.name}</td>
@@ -22,9 +25,9 @@ export class ProductList {
                     <td><i class="bi-cart-plus cart-icon btn-cart" data-product-id="${prod.id}"></i></td>
                 </tr>
             `;
-        });
+            });
 
-        let productList = `
+            productList = `
             <div class="product-list shadow-lg">
                 <div class="lead mb-0">Product List</div>
                 <table class="table table-striped">
@@ -44,17 +47,20 @@ export class ProductList {
                 </table>
             </div>
         `;
+        }
 
         document.getElementById('product-list').innerHTML = productList;
         let buttonCarts = document.getElementsByClassName('btn-cart');
+        if(buttonCarts) {
+            Array.prototype.forEach.call(buttonCarts, function(buttonCart) {
+                buttonCart.addEventListener('click', function() {
+                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
+                        let shoppingCart = new ShoppingCart(cart);
+                        shoppingCart.render();
+                    });
+                })
+            });
+        }
 
-        Array.prototype.forEach.call(buttonCarts, function(buttonCart) {
-            buttonCart.addEventListener('click', function() {
-                ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
-                    let shoppingCart = new ShoppingCart(cart);
-                    shoppingCart.render();
-                });
-            })
-        });
     }
 }

@@ -1,5 +1,4 @@
 import { UserAPI } from "../../modules/user-api.js";
-import { Config } from "../../modules/config.js";
 import { ErrorAlert } from "../alert/error-alert.js";
 import { Header } from "../header/header.js";
 import { Util } from "../../modules/util.js";
@@ -37,7 +36,7 @@ export class Login {
                 result => {
                     console.log(`accessToken is ${result.accessToken}`)
                     if(result.accessToken) {
-                        sessionStorage.setItem(Config.ACCESS_TOKEN_NAME, result.accessToken);
+                        Util.setAccessToken(result.accessToken);
                         new Nav().render(new Logout(), result);
                         new Header().remove();
                         Util.renderProductList();

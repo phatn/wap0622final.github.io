@@ -3,8 +3,16 @@ import { ProductAPI } from "./product-api.js";
 import { ProductList } from "../components/product/product-list.js";
 import { ShoppingCartAPI}  from "./shopping-cart-api.js";
 import { ShoppingCart } from "../components/shoppingCart/shopping-cart.js";
+import { Nav } from "../components/nav/nav.js";
+import { Logout } from "../components/logout/logout.js";
+import { Header } from "../components/header/header.js";
+import { Login } from "../components/login/login.js";
 
 export class Util {
+
+    static setAccessToken = (accessToken) => sessionStorage.setItem(Config.ACCESS_TOKEN_NAME, accessToken);
+
+    static removeAccessToken = () => sessionStorage.removeItem(Config.ACCESS_TOKEN_NAME)
 
     static getAccessToken = () => sessionStorage.getItem(Config.ACCESS_TOKEN_NAME)
 
@@ -24,11 +32,19 @@ export class Util {
         })
     }
 
+    static removeProductList() {
+        new ProductList(null).render();
+    }
+
     static renderShoppingCart() {
         ShoppingCartAPI.getAll().then(cart => {
             let shoppingCart = new ShoppingCart(cart);
             shoppingCart.render();
         })
+    }
+
+    static removeShoppingCart() {
+        document.getElementById('shopping-cart').innerHTML = '';
     }
 
     static toTitleCase(str) {
@@ -38,6 +54,23 @@ export class Util {
 
         const lowerStr = str.toLowerCase();
         return str.charAt(0).toLocaleUpperCase() + lowerStr.slice(1);
+    }
+
+    static renderApplication() {
+        let sessionId = Util.getAccessToken();
+        if(sessionId) {
+            new Nav().render(new Logout(), {
+                name: Util.toTitleCase(Util.getSessionUsername())
+            });
+            new Header().remove();
+            Util.renderProductList();
+            Util.renderShoppingCart();
+        } else {
+            new Nav().render(new Login());
+            new Header().render();
+            Util.removeProductList();
+            Util.removeShoppingCart();
+        }
     }
 
 }
