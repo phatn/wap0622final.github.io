@@ -1,3 +1,5 @@
+import { Config } from "../../modules/config.js";
+
 export class SuccessAlert {
 
     render(message = '') {
@@ -13,10 +15,10 @@ export class SuccessAlert {
         notificationElement.innerHTML = nav;
         window.setTimeout(function() {
             notificationElement.innerHTML = ''
-        }, 5000);
+        }, Config.ALERT_TIME_OUT);
     }
 
     remove() {
-        document.getElementById('header').innerHTML = '';
+        document.getElementById('notification').innerHTML = '';
     }
 }

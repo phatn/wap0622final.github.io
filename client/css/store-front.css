@@ -1,5 +1,5 @@
-#main-container {
-    position: relative;
+#container {
+    margin-bottom: 5rem;
 }
 
 #login {

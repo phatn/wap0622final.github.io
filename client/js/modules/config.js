@@ -4,4 +4,6 @@ export class Config {
 
     static ACCESS_TOKEN_NAME = 'NJESSIONID';
 
+    static ALERT_TIME_OUT = 4000;
+
 }

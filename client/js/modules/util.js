@@ -31,4 +31,13 @@ export class Util {
         })
     }
 
+    static toTitleCase(str) {
+        if(!str) {
+            return '';
+        }
+
+        const lowerStr = str.toLowerCase();
+        return str.charAt(0).toLocaleUpperCase() + lowerStr.slice(1);
+    }
+
 }

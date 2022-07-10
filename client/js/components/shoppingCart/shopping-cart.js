@@ -75,40 +75,48 @@ export class ShoppingCart {
 
         let buttonAddCarts = document.getElementsByClassName('btn-cart-plus');
 
-        Array.prototype.forEach.call(buttonAddCarts, function(buttonAddCart) {
-            buttonAddCart.addEventListener('click', function() {
-                ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
-                    self.cart = cart;
-                    self.render();
-                });
-            })
-        });
+        if(buttonAddCarts) {
+            Array.prototype.forEach.call(buttonAddCarts, function(buttonAddCart) {
+                buttonAddCart.addEventListener('click', function() {
+                    ShoppingCartAPI.addCartItem(this.dataset.productId).then(cart => {
+                        self.cart = cart;
+                        self.render();
+                    });
+                })
+            });
+        }
+
 
         let buttonRemoveCarts = document.getElementsByClassName('btn-cart-minus');
+        if(buttonRemoveCarts) {
+            Array.prototype.forEach.call(buttonRemoveCarts, function(buttonRemoveCart) {
+                buttonRemoveCart.addEventListener('click', function() {
+                    ShoppingCartAPI.removeCartItem(this.dataset.productId).then(cart => {
+                        self.cart = cart;
+                        self.render();
+                    });
+                })
+            });
+        }
 
-        Array.prototype.forEach.call(buttonRemoveCarts, function(buttonRemoveCart) {
-            buttonRemoveCart.addEventListener('click', function() {
-                ShoppingCartAPI.removeCartItem(this.dataset.productId).then(cart => {
-                    self.cart = cart;
-                    self.render();
-                });
-            })
-        });
 
         let btnPlaceOrder = document.getElementById('btn-place-order');
-        btnPlaceOrder.addEventListener('click', function() {
-            ShoppingCartAPI.placeOrder().then(data => {
-                if(data.error) {
-                    new ErrorAlert().render(data.error);
-                } else {
-                    self.cart = data.cart;
-                    self.render();
+        if(btnPlaceOrder) {
+            btnPlaceOrder.addEventListener('click', function() {
+                ShoppingCartAPI.placeOrder().then(data => {
+                    if(data.error) {
+                        new ErrorAlert().render(data.error);
+                    } else {
+                        self.cart = data.cart;
+                        self.render();
 
-                    let productList = new ProductList(data.products);
-                    productList.render();
-                    new SuccessAlert().render(data.message)
-                }
+                        let productList = new ProductList(data.products);
+                        productList.render();
+                        new SuccessAlert().render(data.message)
+                    }
+                });
             });
-        });
+        }
+
     }
 }

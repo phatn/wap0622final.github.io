@@ -1,3 +1,12 @@
+import { UserAPI } from "../../modules/user-api.js";
+import { Config } from "../../modules/config.js";
+import { ErrorAlert } from "../alert/error-alert.js";
+import { Header } from "../header/header.js";
+import { Util } from "../../modules/util.js";
+import { Nav } from "../nav/nav.js";
+import { Logout } from "../logout/logout.js";
+
+
 export class Login {
 
     render() {
@@ -16,5 +25,30 @@ export class Login {
         `;
 
         document.getElementById('login').innerHTML = login;
+        document.getElementById('username').focus();
+
+        let btnLogin = document.getElementById('btn-login');
+        btnLogin.addEventListener('click', e => {
+            e.preventDefault();
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+
+            UserAPI.authenticate({username, password }).then(
+                result => {
+                    console.log(`accessToken is ${result.accessToken}`)
+                    if(result.accessToken) {
+                        sessionStorage.setItem(Config.ACCESS_TOKEN_NAME, result.accessToken);
+                        new Nav().render(new Logout(), result);
+                        new Header().remove();
+                        Util.renderProductList();
+                        Util.renderShoppingCart();
+
+                    } else {
+                        new ErrorAlert().render('Login failed');
+                    }
+                }
+            );
+
+        })
     }
 }

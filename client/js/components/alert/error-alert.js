@@ -1,3 +1,5 @@
+import { Config } from "../../modules/config.js";
+
 export class ErrorAlert {
 
     render(message = '') {
@@ -13,7 +15,7 @@ export class ErrorAlert {
         notificationElement.innerHTML = nav;
         window.setTimeout(function() {
             notificationElement.innerHTML = ''
-        }, 5000);
+        }, Config.ALERT_TIME_OUT);
     }
 
     remove() {
