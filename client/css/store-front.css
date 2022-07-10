@@ -1,0 +1,81 @@
+#main-container {
+    position: relative;
+}
+
+#login {
+    color: #fff;
+}
+
+#login input {
+    height: 1.5rem;
+}
+
+#login button {
+   margin-left: 2rem;
+}
+
+#login label {
+    margin-right: 1rem;
+}
+
+.btn-login {
+    margin-left: 0.5rem;
+    height: 3rem;
+    width: 7rem;
+}
+
+#login div.form-item {
+    display: flex;
+    justify-content: space-between
+}
+
+/*
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+ */
+
+.product-list, .shopping-cart {
+    margin-top: 4rem;
+}
+
+.product-list tr, .shopping-cart tr {
+    vertical-align: middle;
+}
+
+img.logo {
+    height: 4rem;
+}
+
+.cart-icon {
+    font-size: 1.8rem;
+}
+
+.cart-icon:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+img.prod-image {
+    height: 2.5rem;
+}
+
+.cart-item-quantity {
+    width: 3rem;
+    text-align: center;
+}
+
+.btn-cart {
+    font-size: 2rem;
+}
+
+.btn-cart-plus {
+    color: #4CAF50;
+}
+
+.btn-cart-minus {
+    color: red;
+}

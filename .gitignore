@@ -1,0 +1,17 @@
+### VS Code ###
+.vscode/
+
+### MacOS
+.DS_Store
+
+# Dependency directories
+node_modules/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+.vcs.xml
+/.idea/wap0622final.github.io.iml
