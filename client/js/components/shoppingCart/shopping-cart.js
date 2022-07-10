@@ -16,7 +16,7 @@ export class ShoppingCart {
         let cartTotal = 0;
         if(this.cart) {
             this.cart.cartItems.forEach((cartItem, index) => {
-                let total = cartItem.product.price * cartItem.quantity;
+                let total = Math.round(((cartItem.product.price * cartItem.quantity) + Number.EPSILON) * 100) / 100
                 cartTotal += total;
                 rows += `
                 <tr>
@@ -32,8 +32,8 @@ export class ShoppingCart {
                 </tr>
             `;
             });
+            cartTotal = Math.round((cartTotal + Number.EPSILON) * 100) / 100;
         }
-
 
         let shoppingCartItems = `
             <div class="shopping-cart shadow-lg">

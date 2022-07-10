@@ -5,10 +5,10 @@ module.exports = class Data {
 
     static createProducts() {
         let products = Product.findAll();
-        products.push(new Product(1, 'Nodejs', 2000, '/assets/img/products/nodejs.png', 10));
-        products.push(new Product(2, 'Angular', 3000, '/assets/img/products/angular.png', 20));
-        products.push(new Product(3, 'Reactjs', 4000, '/assets/img/products/reactjs.png', 15));
-        products.push(new Product(4, 'Java', 1000, '/assets/img/products/java.png', 18));
+        products.push(new Product(1, 'Node.js', 9.99, '/assets/img/products/nodejs.png', 8));
+        products.push(new Product(3, 'React', 19.99, '/assets/img/products/reactjs.png', 5));
+        products.push(new Product(2, 'Angular', 29.99, '/assets/img/products/angular.png', 13));
+        products.push(new Product(4, 'Java', 39.99, '/assets/img/products/java.png', 18));
     }
 
     static createUsers() {
