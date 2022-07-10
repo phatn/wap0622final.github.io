@@ -19,7 +19,7 @@ export class ShoppingCart {
                     <td>${total}</td>
                     <td style="vertical-align: middle">
                         <span><i class="bi-dash-circle-fill btn-cart btn-cart-minus"></i></span>
-                        <input class="cart-item-quantity" type="text" value="${cartItem.quantity}"
+                        <input class="cart-item-quantity" type="text" value="${cartItem.quantity}" />
                         <span><i class="bi-plus-circle-fill btn-cart btn-cart-plus"></i></span>
                     </td>
                 </tr>
