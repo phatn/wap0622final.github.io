@@ -4,8 +4,8 @@ export class SuccessAlert {
 
     render(message = '') {
         let nav = `
-            <div class="alert-popup">
-                <div class="alert alert-success alert-dismissible fade show">
+            <div class="alert-popup-container">
+                <div class="alert alert-success alert-dismissible fade show alert-popup">
                     ${message}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>

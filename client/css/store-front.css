@@ -105,11 +105,11 @@ img.prod-image {
     padding: 0.7rem 1.5rem 0.7rem 1.5rem;
 }
 
-.alert-popup {
+.alert-popup-container {
     position: fixed;
     top: 0;
     z-index: 10000;
-    width: 100%
+    width: 60%
 }
 
 .welcome-user {
@@ -128,4 +128,8 @@ input.error {
 
 .form-item #password {
     margin-top: 0.1rem;
+}
+
+.alert-popup {
+    padding: 2rem;
 }
