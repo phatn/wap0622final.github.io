@@ -22,7 +22,7 @@ exports.addCartItem = (req, res, next) => {
     if(shoppingCart.addCartItem(productId)) {
         res.status(201).json(Session.get(username));
     } else {
-        res.status(201).json({error: "Can't add product into the shopping cart!"});
+        res.status(201).json({error: "The quantity of product in the cart can't be greater than its stock!"});
     }
 }
 
@@ -50,7 +50,7 @@ exports.placeOrder = (req, res, next) => {
             res.status(201).json({
                 cart: Session.get(username),
                 products: Product.findAll(),
-                message: 'Placed order successfully'
+                message: 'Placed order successfully.'
             });
         } else {
             res.status(201).json({error: 'Cannot place order, please reduce quantity of product!'});
